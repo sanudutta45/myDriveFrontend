@@ -1,0 +1,30 @@
+#banner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+  align-items: center;
+  color: white;
+  border-radius: 5px;
+  flex-wrap: wrap;
+  align-content: center;
+
+  h1 {
+    padding-left: 80px;
+    font-size: 35px;
+  }
+  h4 {
+    font-size: 18px;
+    padding-right: 80px;
+    padding-left: 80px;
+  }
+
+  a{
+    text-decoration: none;
+    color:rgb(126, 122, 122);
+  }
+  a:hover{
+    color: rgb(126, 122, 122);
+  }
+}
