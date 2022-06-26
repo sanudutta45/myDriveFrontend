@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 //progress bar(circular)
 import "react-circular-progressbar/dist/styles.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //css
 import "./index.css";

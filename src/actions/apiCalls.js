@@ -14,15 +14,6 @@ export const apiCalls = (method, url, data = {}) => {
   }
 };
 
-export const fileApiCalls = (method, url, config = {}, data = {}) => {
-  return axios({
-    method,
-    url,
-    ...config,
-    data: data,
-  });
-};
-
 /**
  * Add a request interceptor
  */

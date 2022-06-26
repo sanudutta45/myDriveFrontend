@@ -25,7 +25,7 @@ function NavigationHeader(props) {
   return (
     <section id="navigation">
       <div className="topnav d-flex" id="myTopnav">
-        <NavLink
+        {/* <NavLink
           to={`${match.url}/profile`}
           className="link-to"
           activeStyle={{
@@ -34,7 +34,7 @@ function NavigationHeader(props) {
           }}
         >
           Profile
-        </NavLink>
+        </NavLink> */}
         <NavLink
            to={`${match.url}/dashboard`}
           className="link-to"
@@ -45,7 +45,7 @@ function NavigationHeader(props) {
         >
           My Drive
         </NavLink>
-        <NavLink
+        {/* <NavLink
            to={`${match.url}/about`}
           className="link-to"
           activeStyle={{
@@ -54,12 +54,12 @@ function NavigationHeader(props) {
           }}
         >
           About
-        </NavLink>
+        </NavLink> */}
         <Link to="/" className="logout link-to ml-auto" onClick={handleSignOut}>
           Logout
         </Link>
-        <span class="icon" onClick={myFunction}>
-          <i class="fa fa-bars"></i>
+        <span className="icon" onClick={myFunction}>
+          <i className="fa fa-bars"></i>
         </span>
       </div>
     </section>

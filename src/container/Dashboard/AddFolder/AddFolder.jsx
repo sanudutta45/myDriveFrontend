@@ -3,7 +3,7 @@ import React, { useState, Fragment } from "react";
 //modal
 import AddFolderModal from "./AddFolderModal";
 
-const AddFolder = ({ currentFolder, setReFetchChild, folder }) => {
+const AddFolder = ({ currentFolder, setReFetchChild }) => {
   const [openModal, setOpenModal] = useState(false);
 
   return (

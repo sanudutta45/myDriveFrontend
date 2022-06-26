@@ -9,7 +9,7 @@ const FolderBreadCrumbs = ({ currentFolder }) => {
 //   console.log("path", path);
   return (
     <Breadcrumb
-      className="flex-grow-1 w-100"
+      className="flex-grow-1"
       listProps={{ className: "bg-white pl-0 m-0" }}
     >
       {path.map((folder, index) => (
