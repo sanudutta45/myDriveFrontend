@@ -23,7 +23,7 @@ function DashedBoard(props) {
   return (
     <section id='dashboard'>
       <Container fluid>
-        <div className='d-flex align-items-center'>
+        <div className='d-flex align-items-center my-1'>
           <FolderBreadCrumbs currentFolder={folder} />
           <AddFile currentFolder={folder} setReFetchChild={setReFetchChild} />
           <AddFolder

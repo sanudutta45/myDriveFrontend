@@ -55,7 +55,7 @@ function NavigationHeader(props) {
         >
           About
         </NavLink> */}
-        <Link to="/" className="logout link-to ml-auto" onClick={handleSignOut}>
+        <Link to="/" className="logout link-to ms-auto" onClick={handleSignOut}>
           Logout
         </Link>
         <span className="icon" onClick={myFunction}>

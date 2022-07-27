@@ -7,14 +7,11 @@ import { v4 as uuidv4 } from "uuid"
 import {
   saveUpload,
   doGetSignedPart,
-  doGetUploadId,
   abortUpload,
 } from "../../../../actions/fileAction"
 import { Spinner } from "react-bootstrap"
 
 const axios = Axios.create()
-
-const SLICE_SIZE = 10_000_000
 
 const DownloaderCard = ({ file, setReFetchChild, currentFolder }) => {
   const [chunks, setChunks] = useState([])
@@ -26,8 +23,7 @@ const DownloaderCard = ({ file, setReFetchChild, currentFolder }) => {
   const folderIdRef = useRef(currentFolder.id)
   const axiosSourceRef = useRef(Axios.CancelToken.source())
   const bucketFileName = useRef(null)
-
-  let uploadIdRef = useRef(null)
+  const uploadIdRef = useRef(null)
 
   const onUploadProgress = (fileSize, id, e) => {
     const completeProgress = (e.loaded / fileSize) * 100 || 0
@@ -50,8 +46,8 @@ const DownloaderCard = ({ file, setReFetchChild, currentFolder }) => {
 
     for (const indexStr of urls) {
       const partIndex = parseInt(indexStr)
-      const start = partIndex * SLICE_SIZE
-      const end = (partIndex + 1) * SLICE_SIZE
+      const start = partIndex * fileData?.sliceSize
+      const end = (partIndex + 1) * fileData?.sliceSize
       const blob =
         partIndex < urls.length ? file.slice(start, end) : file.slice(start)
       const config = {
@@ -88,12 +84,6 @@ const DownloaderCard = ({ file, setReFetchChild, currentFolder }) => {
       await saveUpload(values)
       setStatus("done")
       if (currentFolder.id === folderIdRef.current) {
-        console.log(
-          "current folder ",
-          currentFolder.id,
-          " ",
-          folderIdRef.current
-        )
         setReFetchChild((refetch) => !refetch)
       }
     } catch (error) {
@@ -104,25 +94,23 @@ const DownloaderCard = ({ file, setReFetchChild, currentFolder }) => {
   const prepareUpload = async () => {
     const selectedFile = file
     const fileSize = selectedFile.size
-    const noOfParts = Math.floor(fileSize / SLICE_SIZE) + 1
     const fileName = selectedFile.name
     bucketFileName.current = `${uuidv4().substring(0, 8)}_${fileName}`
+    const values = {
+      bucketFileName: bucketFileName.current,
+      fileSize,
+    }
     try {
-      uploadIdRef.current = await doGetUploadId(bucketFileName.current)
-
-      const values = {
-        bucketFileName: bucketFileName.current,
-        parts: noOfParts,
-        uploadId: uploadIdRef.current,
-      }
-      const signedUrl = await doGetSignedPart(values)
+      const signedUrls = await doGetSignedPart(values)
+      uploadIdRef.current = signedUrls?.uploadId
 
       const currentFile = {
         name: fileName,
         bucketFileName: bucketFileName.current,
         file: selectedFile,
-        partsUrl: signedUrl,
-        uploadId: uploadIdRef.current,
+        partsUrl: signedUrls?.partUrls,
+        uploadId: signedUrls?.uploadId,
+        sliceSize: signedUrls?.sliceSize,
       }
       handleUpload(currentFile)
     } catch (error) {

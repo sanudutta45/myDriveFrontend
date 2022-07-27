@@ -41,7 +41,7 @@ const File = ({ file, setReFetchChild }) => {
           className='text-truncate file_card'
           style={{ maxWidth: "150px" }}
         >
-          <i className='fa fa-file mr-2' />
+          <i className='fa fa-file me-2' />
           {file && file.name}
         </Button>
         <Dropdown.Toggle split id='file_options' variant='outline-dark' />

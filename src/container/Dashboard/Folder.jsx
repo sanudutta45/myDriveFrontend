@@ -37,7 +37,7 @@ const Folder = ({ folder, setReFetchChild }) => {
           className='text-truncate w-100'
           as={Link}
         >
-          <i className='fa fa-folder mr-2' />
+          <i className='fa fa-folder me-2' />
           {folder.name}
         </Button>
         <Dropdown.Toggle split id='file_options' variant='outline-dark' />

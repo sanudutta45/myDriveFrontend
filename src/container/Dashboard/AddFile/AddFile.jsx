@@ -12,7 +12,7 @@ const AddFile = ({ currentFolder, setReFetchChild }) => {
 
   return (
     <Fragment>
-      <label className='btn btn-outline-success btn-sm m-0 mr-2'>
+      <label className='btn btn-outline-success btn-sm m-0 me-2'>
         File +
         <input
           type='file'

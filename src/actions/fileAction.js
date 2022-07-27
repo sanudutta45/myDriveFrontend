@@ -2,26 +2,26 @@ import { apiCalls } from "./apiCalls"
 
 const ss_login_page_api_url = process.env.REACT_APP_SS_LOGIN_PAGE_API_URL
 
-export const doGetUploadId = async (value) => {
-  const url = ss_login_page_api_url + "/api/v1/file/upload_id/" + value
-  try {
-    const result = await apiCalls("get", url)
-    return result.data
-  } catch (error) {
-    if (error.response) {
-      throw new Error(error.response.data.error)
-    } else {
-      console.error("failed to get upload id, server err:", error.message)
-      throw new Error(error.message)
-    }
-  }
-}
+// export const doGetUploadId = async (value) => {
+//   const url = ss_login_page_api_url + "/api/v1/file/upload_id/" + value
+//   try {
+//     const result = await apiCalls("get", url)
+//     return result.data
+//   } catch (error) {
+//     if (error.response) {
+//       throw new Error(error.response.data.error)
+//     } else {
+//       console.error("failed to get upload id, server err:", error.message)
+//       throw new Error(error.message)
+//     }
+//   }
+// }
 
 export const doGetSignedPart = async (values) => {
   const url = ss_login_page_api_url + "/api/v1/file/signed_url"
   const reqObject = {
     bucketFileName: values.bucketFileName,
-    parts: values.parts,
+    fileSize: values.fileSize,
     uploadId: values.uploadId,
   }
   try {

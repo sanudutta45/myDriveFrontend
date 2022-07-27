@@ -24,7 +24,6 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "serve": "nodemon server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
