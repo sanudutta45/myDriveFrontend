@@ -33,11 +33,11 @@ jobs:
       - uses: actions/checkout@v3
         name: Check out code
 
-      - name: ssh into EC2 instance and deploy
-        run: |
-          ssh -i ${{secrets.AWS_PRIVATE_KEY}} ubuntu@ec2-15-207-106-156.ap-south-1.compute.amazonaws.com
-          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-          docker pull ${{secrets.DOCKER_USERNAME}}/mydrive_gui
-          docker stop mydrive_gui
-          docker rm mydrive_gui
-          docker run --detach --name mydrive_gui -p 3000:3000 ${{secrets.DOCKER_USERNAME}}/mydrive_gui
+      - uses: appleboy/ssh-action@master
+        name: ssh into EC2 instance and deploy
+        with:
+          host: ${{secrets.AWS_EC2_HOST}}
+          username: ubuntu
+          key: ${{secrets.AWS_PRIVATE_KEY}}
+          script: |
+            pwd
