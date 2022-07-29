@@ -24,3 +24,23 @@ jobs:
           registry: docker.io
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
+  
+  deploy:
+    name: Login to AWS EC2 instance and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: Check out code
+
+      - uses: appleboy/ssh-action@master
+        name: ssh into EC2 instance and deploy
+        with:
+          host: ${{secrets.AWS_EC2_HOST}}
+          username: ubuntu
+          key: ${{secrets.AWS_PRIVATE_KEY}}
+          script: |
+            docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+            docker pull ${{secrets.DOCKER_USERNAME}}/mydrive_gui
+            docker stop mydrive_gui
+            docker rm mydrive_gui
+            docker run --detach --name mydrive_gui -p 3000:3000 ${{secrets.DOCKER_USERNAME}}/mydrive_gui
