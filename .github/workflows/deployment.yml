@@ -41,7 +41,7 @@ jobs:
           key: ${{secrets.AWS_PRIVATE_KEY}}
           script: |
             sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-            sudo docker pull ${{secrets.DOCKER_USERNAME}}/mydrive_gui
+            sudo docker pull ${{secrets.DOCKER_USERNAME}}/mydrive_gui:v2-27b0656
             sudo docker stop mydrive_gui
             sudo docker rm mydrive_gui
-            sudo docker run --detach --name mydrive_gui -p 3000:3000 ${{secrets.DOCKER_USERNAME}}/mydrive_gui
+            sudo docker run --detach --name mydrive_gui -p 3000:3000 ${{secrets.DOCKER_USERNAME}}/mydrive_gui:v2-27b0656
