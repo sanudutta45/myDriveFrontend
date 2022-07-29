@@ -40,8 +40,8 @@ jobs:
           username: ubuntu
           key: ${{secrets.AWS_PRIVATE_KEY}}
           script: |
-            docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-            docker pull ${{secrets.DOCKER_USERNAME}}/mydrive_gui
-            docker stop mydrive_gui
-            docker rm mydrive_gui
-            docker run --detach --name mydrive_gui -p 3000:3000 ${{secrets.DOCKER_USERNAME}}/mydrive_gui
+            sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+            sudo docker pull ${{secrets.DOCKER_USERNAME}}/mydrive_gui
+            sudo docker stop mydrive_gui
+            sudo docker rm mydrive_gui
+            sudo docker run --detach --name mydrive_gui -p 3000:3000 ${{secrets.DOCKER_USERNAME}}/mydrive_gui
