@@ -21,6 +21,7 @@ jobs:
         name: Build and push docker image
         with:
           image: sanudutta/mydrive_gui
+          tags: latest
           registry: docker.io
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
@@ -41,7 +42,7 @@ jobs:
           key: ${{secrets.AWS_PRIVATE_KEY}}
           script: |
             sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-            sudo docker pull ${{secrets.DOCKER_USERNAME}}/mydrive_gui:v2-27b0656
+            sudo docker pull ${{secrets.DOCKER_USERNAME}}/mydrive_gui
             sudo docker stop mydrive_gui
             sudo docker rm mydrive_gui
-            sudo docker run --detach --name mydrive_gui -p 3000:80 ${{secrets.DOCKER_USERNAME}}/mydrive_gui:v2-27b0656
+            sudo docker run --detach --name mydrive_gui -p 3000:80 ${{secrets.DOCKER_USERNAME}}/mydrive_gui
