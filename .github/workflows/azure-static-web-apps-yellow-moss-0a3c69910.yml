@@ -33,6 +33,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           PYTHON_VERSION: 2.7.1
+          REQUIRED_OS_PACKAGES: true
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
